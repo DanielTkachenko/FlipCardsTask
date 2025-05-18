@@ -14,12 +14,21 @@ public class Card : MonoBehaviour, ICard
     [SerializeField] private Sprite backSprite;
 
     private CardSide _currentSide;
-    
-    public CardSide CurrentSide { get; }
+
+    public CardSide CurrentSide => _currentSide;
+    public Transform Transform => transform;
 
     private void Awake()
     {
         SetSide(CardSide.Back);
+    }
+
+    private void OnDestroy()
+    {
+        if (content.texture != null)
+        {
+            Destroy(content.texture);
+        }
     }
 
     public void SetContent(Texture2D texture)

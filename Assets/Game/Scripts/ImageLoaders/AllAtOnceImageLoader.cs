@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Abstract;
 using Game.Scripts.Enums;
+using UnityEngine;
 
 namespace Game.Scripts.ImageLoaders
 {
@@ -17,7 +18,7 @@ namespace Game.Scripts.ImageLoaders
             _cardFlipAnimation = cardFlipAnimation;
         }
         
-        public async UniTask Load(IReadOnlyList<Card> cards, string url, CancellationToken cancellationToken = default)
+        public async UniTask Load(IReadOnlyList<ICard> cards, string url, CancellationToken cancellationToken = default)
         {
             var downloadAndFlipBack = cards.Select(async card =>
             {

@@ -23,6 +23,9 @@ namespace Game.Scripts
 
         private IReadOnlyList<ICard> _cards;
         
-        private void Awake() => _cards = _cardsContainer.GetComponentsInChildren<ICard>();
+        private void Awake()
+        {
+            _cards = _cardsContainer.GetComponentsInChildren<ICard>();
+        }
     }
 }

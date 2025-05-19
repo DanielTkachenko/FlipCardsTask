@@ -6,11 +6,14 @@ using Game.Scripts;
 using Game.Scripts.Abstract;
 using Game.Scripts.Enums;
 using Game.Scripts.ImageLoaders;
+using Game.Scripts.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private string _downloadUrl;
+    [SerializeField] private GameConfig gameConfig;
+    [SerializeField] private CardAnimationConfig cardAnimationConfig;
     [SerializeField] MainCanvas _mainCanvas;
     
     private IReadOnlyList<ICard> _cards;
@@ -22,7 +25,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         _imageDownloader = new ImageDownloader();
-        _cardFlipAnimation = new CardFlipAnimation();
+        _cardFlipAnimation = new CardFlipAnimation(cardAnimationConfig);
         _imageLoaders = new Dictionary<string, IImageLoader>()
         {
             { "All at once" , new AllAtOnceImageLoader(_imageDownloader, _cardFlipAnimation)},
@@ -63,7 +66,7 @@ public class GameController : MonoBehaviour
             _cancellationTokenSource = new CancellationTokenSource();
             
             var isCancelled = await loader
-                .Load(_cards, _downloadUrl, _cancellationTokenSource.Token)
+                .Load(_cards, gameConfig.url, _cancellationTokenSource.Token)
                 .SuppressCancellationThrow();
 
             if (isCancelled)

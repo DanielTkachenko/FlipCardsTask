@@ -448,7 +448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce38d78d9dfb9e4ab7f0ecec8d27b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _downloadUrl: https://picsum.photos/256
+  gameConfig: {fileID: 11400000, guid: 55eb3a773161db9469ce19f4ca48ea14, type: 2}
+  cardAnimationConfig: {fileID: 11400000, guid: 216616f5b8b5c50458ccefed77785275, type: 2}
   _mainCanvas: {fileID: 399096930028598280}
 --- !u!4 &1788228815
 Transform:
